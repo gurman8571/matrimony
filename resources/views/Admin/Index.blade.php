@@ -1,4 +1,14 @@
+<?php
+use App\Http\Controllers\Admin\UserController;
 
+$users=UserController::calculateuser();
+$admin=UserController::calculateadmin();
+$gender=UserController::calculategender();
+
+$adminpercent=round(($admin/$users)*100);
+$malespercent=round(($gender['male']/$users)*100);
+$femalespercent=round(($gender['female']/$users)*100);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -97,9 +107,21 @@
                 <!-- Main footer -->
 
             </div>
-
+<br>
+<br>
             <!-- Panels -->
+<div id="chart-section flex flex-row m-4" style="display: flex; margin-8px; flex-direction:row; justify-content:center ">
 
+    <div>
+       <canvas id="myChart" style="width:150%;max-width:900px ; max-height:900px;height:200%"></canvas>
+</div>
+
+<div style="padding:30px">
+    <canvas id="myChart_pie" style="width:150%;max-width:300px;max-height:1000px;height:200%"></canvas>
+
+</div>
+
+</div>
             <!-- Settings Panel -->
             <!-- Backdrop -->
             <div x-transition:enter="transition duration-300 ease-in-out" x-transition:enter-start="opacity-0"
@@ -240,6 +262,8 @@
     <!-- All javascript code in this project for now is just for demo DON'T RELY ON IT  -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.bundle.min.js"></script>
     <script src="build/js/script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js" integrity="sha512-sW/w8s4RWTdFFSduOTGtk4isV1+190E/GghVffMA9XczdJ2MDzSzLEubKAs5h0wzgSJOQTRYyaz73L3d6RtJSg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     <script>
     const setup = () => {
         const getTheme = () => {
@@ -373,22 +397,65 @@
             updateLineChart,
         }
     }
-    document.getElementById('add').addEventListener('click', () => {
-        document.getElementById('pop').style.display = "flex";
-        document.getElementById('modal').style.display = "flex";
-
-    })
-    document.getElementById('close').addEventListener('click', () => {
-        document.getElementById('pop').style.display = "none"
-        document.getElementById('modal').style.display = "none";
-
-    })
-    document.getElementById('alert-close').addEventListener('click', () => {
-        document.getElementById('alert').style.display = "none"
 
 
-    })
-    </script>
+    // charts
+    const ctx = document.getElementById('myChart').getContext('2d');
+    //var admin= '<?php ?>'
+    const myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['admins', 'female', 'male'],
+        datasets: [{
+            label: 'active users on website',
+            data: ['{{$admin}}',   '{{$gender['female']}}', '  {{$gender['male']}}'],
+            backgroundColor: [
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+
+            ],
+            borderColor: [
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+
+            ],
+            borderWidth: 0.5
+        }]
+    },
+
+});
+
+
+const ctx_pie = document.getElementById('myChart_pie').getContext('2d');
+    //var admin= '<?php ?>'
+    const myChart_pie = new Chart(ctx_pie, {
+    type: 'pie',
+    data: {
+        labels: ['admins', 'female', 'male'],
+        datasets: [{
+            label: 'active users on website',
+            data: ['{{$admin}}',   '{{$gender['female']}}', '  {{$gender['male']}}'],
+            backgroundColor: [
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+
+            ],
+            borderColor: [
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+
+            ],
+            borderWidth: 0.5
+        }]
+    },
+
+
+});    </script>
+
 </body>
 
 </html>
