@@ -1,0 +1,896 @@
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@600&family=Roboto&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    text-transform: capitalize;
+    font-size: 20px;
+}
+
+::-webkit-input-placeholder {
+    color: black;
+}
+
+input[type="text"],
+input[type="number"],
+select {
+    color: black;
+}
+
+.radio {
+    margin: 0.5rem;
+}
+
+.radio input[type=radio] {
+    position: absolute;
+    opacity: 0;
+}
+
+.radio input[type=radio]+.radio-label:before {
+    content: "";
+    background: #f4f4f4;
+    border-radius: 100%;
+    border: 1px solid #b4b4b4;
+    display: inline-block;
+    width: 1.4em;
+    height: 1.4em;
+    position: relative;
+    top: -0.2em;
+    margin-right: 1em;
+    vertical-align: top;
+    cursor: pointer;
+    text-align: center;
+    transition: all 250ms ease;
+}
+
+.radio input[type=radio]:checked+.radio-label:before {
+    background-color: #3197EE;
+    box-shadow: inset 0 0 0 4px #f4f4f4;
+}
+
+.radio input[type=radio]:focus+.radio-label:before {
+    outline: none;
+    border-color: #3197EE;
+}
+
+.radio input[type=radio]+.radio-label:empty:before {
+    margin-right: 0;
+}
+
+body {
+    margin: 0px auto;
+    color: #070707;
+    text-align: left;
+    line-height: 15px;
+    background: #eee;
+    font-family: 'Poppins', sans-serif;
+}
+
+.iconspaddtop {
+    padding-top: 100px;
+}
+
+.helpmewrite {
+    padding-top: 140px;
+}
+
+.registxt1 {
+    font-size: 14px;
+}
+
+.registxt2 {
+    font-size: 16px;
+}
+
+.registxt3 {
+    font-size: 18px;
+}
+
+.posrelative {
+    position: relative;
+}
+
+.posabsolute {
+    position: absolute;
+}
+
+.fleft {
+    float: left;
+}
+
+.fright {
+    float: right;
+}
+
+.clear {
+    clear: both;
+}
+
+.txt-left {
+    text-align: left;
+}
+
+.txt-right {
+    text-align: right;
+}
+
+.txt-center {
+    text-align: center;
+}
+
+.boldtxt {
+    font-weight: bold;
+}
+
+.vmiddle {
+    vertical-align: middle;
+}
+
+.margl5 {
+    margin-left: 5px;
+}
+
+.margl10 {
+    margin-left: 10px;
+}
+
+.margtl15 {
+    margin-left: 15px;
+}
+
+.margl20 {
+    margin-left: 20px;
+}
+
+.margr5 {
+    margin-right: 5px;
+}
+
+.margr10 {
+    margin-right: 10px;
+}
+
+.margr15 {
+    margin-right: 15px;
+}
+
+.margr20 {
+    margin-right: 20px;
+}
+
+.margb5 {
+    margin-bottom: 5px;
+}
+
+.margb10 {
+    margin-bottom: 10px;
+}
+
+.margb15 {
+    margin-bottom: 15px;
+}
+
+.margb20 {
+    margin-bottom: 20px;
+}
+
+.margt5 {
+    margin-top: 5px;
+}
+
+.margt10 {
+    margin-top: 10px;
+}
+
+.margt15 {
+    margin-top: 15px;
+}
+
+.margt20 {
+    margin-top: 20px;
+}
+
+.margb5 {
+    margin-bottom: 5px;
+}
+
+.margb10 {
+    margin-bottom: 10px;
+}
+
+.margb15 {
+    margin-bottom: 15px;
+}
+
+.margb20 {
+    margin-bottom: 20px;
+}
+
+.paddt5 {
+    padding-top: 5px;
+}
+
+.paddt7 {
+    padding-top: 7px;
+}
+
+.paddt10 {
+    padding-top: 10px;
+}
+
+.paddt12 {
+    padding-top: 12px;
+}
+
+.paddt15 {
+    padding-top: 15px;
+}
+
+.paddt20 {
+    padding-top: 20px;
+}
+
+.paddt25 {
+    padding-top: 25px;
+}
+
+.paddt30 {
+    padding-top: 30px;
+}
+
+.paddt35 {
+    padding-top: 35px;
+}
+
+.paddt40 {
+    padding-top: 40px;
+}
+
+.paddt50 {
+    padding-top: 50px;
+}
+
+.paddb5 {
+    padding-bottom: 5px;
+}
+
+.paddb10 {
+    padding-bottom: 10px;
+}
+
+.paddb15 {
+    padding-bottom: 15px;
+}
+
+.paddb20 {
+    padding-bottom: 20px;
+}
+
+.paddb25 {
+    padding-bottom: 25px;
+}
+
+.paddb30 {
+    padding-bottom: 30px;
+}
+
+.paddb40 {
+    padding-bottom: 40px;
+}
+
+.paddb50 {
+    padding-bottom: 50px;
+}
+
+.paddl5 {
+    padding-left: 5px;
+}
+
+.paddl10 {
+    padding-left: 10px;
+}
+
+.paddl15 {
+    padding-left: 15px;
+}
+
+.paddl20 {
+    padding-left: 20px;
+}
+
+.paddl25 {
+    padding-left: 25px;
+}
+
+.paddl30 {
+    padding-left: 30px;
+}
+
+.paddl45 {
+    padding-left: 45px;
+}
+
+.paddl50 {
+    padding-left: 50px;
+}
+
+.paddr5 {
+    padding-right: 5px;
+}
+
+.paddr10 {
+    padding-right: 10px;
+}
+
+.paddr15 {
+    padding-right: 15px;
+}
+
+.paddr20 {
+    padding-right: 20px;
+}
+
+.paddr25 {
+    padding-right: 25px;
+}
+
+.paddr30 {
+    padding-right: 30px;
+}
+
+.paddt5b5 {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.paddt10b10 {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.paddl40 {
+    padding-left: 40px;
+}
+
+.fs26 {
+    font-size: 26px;
+}
+
+.fs30 {
+    font-size: 30px;
+}
+
+.matri-logo {
+    width: 220px;
+    height: 80px;
+    background-Color: white;
+}
+
+.regis-header {
+    width: 1000px;
+    margin: 0 auto;
+    position: relative;
+    margin-top: 15px;
+}
+
+.header {
+    text-transform: capitalize;
+    text-align: center;
+    color: #EE5057;
+    font-weight: 700;
+    font-size: 40px;
+    ;
+}
+
+* {
+    font-weight: 200;
+}
+
+.regis-logotxt {
+    position: absolute;
+    font-size: 12px;
+    color: #777777;
+    margin-top: -15px;
+    padding-top: 8px;
+    left: 2px;
+    font-family: arial;
+}
+
+.regis-container {
+    width: 1150px;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.regis-level {
+    background: #eee;
+    font-size: 16px;
+    width: 1150px;
+    margin: 0 auto;
+    font-weight: bold;
+    padding: 18px 0 10px 0;
+    text-align: right;
+}
+
+.regis-width {
+    width: 100%;
+}
+
+.regis-width h2 {
+    font-weight: normal;
+    font-size: 22px;
+    color: #070707;
+    font-family: 'Poppins', sans-serif;
+}
+
+.regis-col1 {
+    float: left;
+    width: 195px;
+    font-size: 18px;
+    color: #999;
+    padding-right: 20px;
+    text-align: right;
+}
+
+.regis-col2 {
+    float: left;
+    width: 300px;
+}
+
+.regis-col3 {
+    float: left;
+    width: 225px;
+}
+
+.regis-col4 {
+    float: left;
+    width: 515px;
+}
+
+.pink {
+    color: #EE5057
+}
+
+.hp-button {
+    text-decoration: none;
+    background-color: #EE5057;
+    color: #fff;
+    padding: 20px 40px;
+    border: none;
+    font-size: 20px;
+    position: relative;
+    border-radius: 10px;
+}
+
+.hp-button::before {
+    content: " Continue";
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    text-decoration: none;
+    background-color: rgb(71, 245, 18);
+    color: #fff;
+    padding: 20px 40px;
+    transform: rotateX(270deg);
+    transform-origin: top;
+    transition: all 0.5s;
+    border-radius: 10px;
+}
+
+.hp-button:hover::before {
+    transform: rotateX(0deg);
+}
+
+footer {
+    padding: 20px;
+    margin: 10px;
+    text-align: center;
+    background-color: white;
+}
+
+#imglabel {
+    height: 60px;
+    width: 250px;
+    color: #fff;
+    background-color: #EE5057;
+    pADDING: 5PX;
+    border-radius: 7PX;
+    ;
+    PADDING-LEFT: 6PX;
+    PADDING-RIGHT: 6PX;
+    cursor: pointer;
+}
+
+#image-logo {
+    font-size: 15px;
+}
+
+::-webkit-file-upload-button {
+    background-color: #EE5057;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 10px;
+    border: none;
+}
+
+::-webkit-file-upload-button ::before {
+    content: "hlo";
+}
+
+.hp-button::after {
+    content: " Continue";
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    text-decoration: none;
+    background-color: rgb(18, 109, 245);
+    color: #fff;
+    padding: 15px 20px;
+    transform: rotateX(270deg);
+    transform-origin: bottom;
+    transition: all 0.5s;
+    transition-delay: 0.5s;
+    border-radius: 10px;
+    padding: 20px 40px;
+}
+
+.submit {
+    text-decoration: none;
+    background-color: rgb(18, 109, 245);
+    color: #fff;
+    padding: 20px 40px;
+    border: none;
+    font-size: 20px;
+    position: relative;
+    border-radius: 10px;
+}
+
+.hp-button:hover::after {
+    transform: rotateX(0deg);
+}
+
+.regis-input {
+    border: 0;
+    border-bottom: 1px solid #ddd;
+    font-size: 16px;
+    padding: 2px 0px 4px 12px;
+    width: 100%;
+    font-family: 'Poppins', sans-serif;
+    outline: none;
+    color: #999;
+}
+
+.regis-input::placeholder {
+    color: #999;
+}
+
+.regis-select select {
+    border: 0;
+    font-size: 16px;
+    border-bottom: 1px solid #ddd !important;
+    padding: 2px 0px 2px 12px !important;
+    width: 100%;
+    outline: none;
+    background-size: 12px;
+    background-position: 97% 12px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.regisdob-alert {
+    position: absolute;
+    right: 0;
+    bottom: 12px;
+    width: 26px;
+    height: 26px;
+}
+
+.dobalert-txt {
+    color: #912323;
+    font-size: 14px;
+    line-height: 16px;
+    position: relative;
+    top: -1px;
+    color: #070707 !important;
+}
+
+.regis-protxt {
+    color: #070707;
+    font-size: 16px;
+    line-height: 16px;
+    position: relative;
+    top: -7px;
+}
+
+.regis-chktxt {
+    color: #000;
+    font-size: 13px;
+    padding-top: 10px;
+    margin-left: 215px;
+}
+
+.regis-radio label {
+    color: #363636;
+    margin-right: 10px;
+    padding: 5px 18px 6px 6px;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 13px;
+}
+
+.regis-radiocol1 {
+    float: left;
+    width: 330px;
+}
+
+.regis-radiocol1 label {
+    /**width: 138px;**/
+    width: auto;
+    padding: 5px 15px 6px 0px;
+    text-align: center;
+}
+
+.regis-radiocol2 {
+    float: left;
+    /**width: 520px;**/
+    width: 322px;
+}
+
+.regis-radiocol2 label {
+    /**width: 110px;**/
+    width: auto;
+    padding: 5px 12px 6px 0px;
+    text-align: center;
+}
+
+.regis-left {
+    width: 400px;
+    background: #00a650;
+    font-size: 28px;
+    color: #fff;
+    line-height: 42px;
+    height: 100%;
+    position: absolute;
+    float: left;
+}
+
+.regis-right {
+    width: 750px;
+    background: #fff;
+    float: right;
+}
+
+.regis-select .reg-selectcol {
+    width: 360px;
+    float: left;
+}
+
+.mob-regis-level {
+    display: none;
+}
+
+.imgcrtcouple {
+    width: 150px;
+}
+
+.mobcouprgt {
+    padding: 0 15px 0 15px;
+}
+
+.dispinblk {
+    display: inline-block;
+}
+
+.regis-abttxtarea {
+    border: 1px solid #ddd;
+    width: 500px;
+    height: 100px;
+    padding: 10px;
+    outline: none;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+}
+
+.paddlh2 {
+    padding-left: 45px;
+}
+
+i {
+    font-size: 90px;
+    padding: 8px;
+}
+
+.regis-err {
+    border-bottom: 1px solid #ddd !important;
+    border-color: red !important;
+}
+
+.regis-errtxt {
+    font-size: 15px;
+    color: #EF4444;
+    margin-left: 240px;
+    margin-top: 4px;
+    text-transform: lowercase;
+}
+
+.regis-errtxt :before {
+    content: "*";
+}
+
+.h50 {
+    height: 50px;
+}
+
+.h3 {
+    height: 5px;
+}
+
+.regis-select .reg-selectcol1 {
+    width: 140px;
+    float: left;
+}
+
+.regis-checkbx label {
+    background: #fff;
+    color: #363636;
+    margin-right: 10px;
+    padding: 0px 0px 0px 2px;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 13px;
+    width: 135px;
+    position: relative;
+    top: -2px;
+}
+
+.greenText {
+    color: #000;
+}
+
+.incwidth {
+    width: 360px;
+}
+
+.regis-abtfocuswidth {
+    width: 190px;
+    float: left;
+    padding-left: 10px;
+    line-height: 20px;
+}
+
+
+/****** Select 2  Start*********/
+
+select {
+    color: #999;
+}
+
+.select2-container,
+.select2-drop,
+.select2-search,
+.select2-search input {
+    -webkit-box-sizing: border-box;
+    /* webkit */
+    -moz-box-sizing: border-box;
+    /* firefox */
+    box-sizing: border-box;
+    /* css3 */
+}
+
+.select2-container .select2-choice {
+    display: block;
+    height: auto;
+    padding: 0 21px 0 0px;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    /*white-space: nowrap;*/
+    line-height: 28px;
+    color: #999;
+    text-decoration: none;
+    top: 0px;
+    left: 0px;
+    border: 1px solid transparent;
+    font-size: 16px;
+    /* color:#070707;  */
+}
+
+
+/*
+disabled look for disabled choices in the results dropdown
+*/
+
+
+/********** Select 2 end  ***********/
+
+
+/****** Color Box Start ****/
+
+#colorbox,
+#cboxOverlay,
+#cboxWrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    overflow: hidden;
+}
+
+#cboxOverlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+}
+
+#cboxMiddleLeft,
+#cboxBottomLeft {
+    clear: left;
+}
+
+#cboxContent {
+    position: relative;
+}
+
+#cboxLoadedContent {
+    overflow: auto;
+}
+
+#cboxTitle {
+    margin: 0;
+}
+
+#cboxLoadingOverlay,
+#cboxLoadingGraphic {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+#cboxPrevious,
+#cboxNext,
+#cboxClose,
+#cboxSlideshow {
+    cursor: pointer;
+}
+
+.cboxPhoto {
+    float: left;
+    margin: auto;
+    border: 0;
+    display: block;
+}
+
+#form2 {
+    left: -1200px;
+    top: 60px;
+    position: absolute;
+    overflow: hidden;
+}
+
+#form1 {
+    position: relative;
+    overflow: hidden;
+    transition: 2s;
+    overflow: hidden;
+}
+
+#form4 {
+    left: -1200px;
+    top: 60px;
+    position: absolute;
+}
+
+.white {
+    color: white;
+}
+
+.qoute {
+    text-shadow: 2px 2px 12px rgba(150, 150, 150, 1);
+}
+
+.btn-box {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
