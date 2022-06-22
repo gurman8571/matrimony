@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\CasteController;
 use App\Http\Controllers\Admin\ReligionController;
 use App\Http\Controllers\Admin\WeddingStoryController as AdminStory;
+use App\Http\Controllers\Admin\BlogController as AdminBlog;
 use App\Http\Controllers\Admin\MothertongueController;
 use App\Http\Controllers\Admin\OccupationController;
 use App\Http\Controllers\Admin\UserController;
@@ -180,4 +181,8 @@ Route::group(['middleware' => 'is_admin'], function () {
     Route::get('admin/User/story/Disaply/status/{id}',[AdminStory::class, 'Display'])->name('User.story.displaystatus');
 
 
+               //blog routes
+               Route::post('admin/Blog/create',[AdminBlog::class, 'create'])->name('Blog.create');
+               Route::get('admin/Blog/index',[AdminBlog::class, 'Index'])->name('Blog.index');
+               Route::view('blog/create','Admin.Blogs.Create')->name('Blog.create.view');
 });

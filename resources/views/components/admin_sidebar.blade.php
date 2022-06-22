@@ -164,11 +164,9 @@
                                 :class="{'bg-primary-100 dark:bg-primary': isActive || open}" role="button"
                                 aria-haspopup="true" :aria-expanded="(open || isActive) ? 'true' : 'false'">
                                 <span aria-hidden="true">
-                                    <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                        viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                                    </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M5 3a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2V5a2 2 0 00-2-2H5zm0 2h10v7h-2l-1 2H8l-1-2H5V5z" clip-rule="evenodd" />
+                                      </svg>
                                 </span>
                                 <span class="ml-2 text-sm"> Blogs </span>
                                 <span aria-hidden="true" class="ml-auto">
@@ -184,11 +182,11 @@
                             <div x-show="open" class="mt-2 space-y-2 px-7" role="menu" aria-label="Authentication">
                                 <!-- active & hover classes 'text-gray-700 dark:text-light' -->
                                 <!-- inActive classes 'text-gray-400 dark:text-gray-400' -->
-                                <a href="{{route('admin.index')}}" role="menuitem"
+                                <a href="{{route('Blog.create.view')}}" role="menuitem"
                                     class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700">
                                 Create Blog
                                 </a>
-                                <a href="{{route('admin.userIndex')}}" role="menuitem"
+                                <a href="{{route('Blog.index')}}" role="menuitem"
                                     class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700">
                                    Blog Index
                                 </a>
