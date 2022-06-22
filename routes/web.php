@@ -183,5 +183,6 @@ Route::group(['middleware' => 'is_admin'], function () {
 
                //blog routes
                Route::post('admin/Blog/create',[AdminBlog::class, 'create'])->name('Blog.create');
+               Route::get('admin/Blog/index',[AdminBlog::class, 'Index'])->name('Blog.index');
                Route::view('blog/create','Admin.Blogs.Create')->name('Blog.create.view');
 });

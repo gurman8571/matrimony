@@ -1,14 +1,4 @@
-<?php
-use App\Http\Controllers\Admin\UserController;
 
-$users=UserController::calculateuser();
-$admin=UserController::calculateadmin();
-$gender=UserController::calculategender();
-
-$adminpercent=round(($admin/$users)*100);
-$malespercent=round(($gender['male']/$users)*100);
-$femalespercent=round(($gender['female']/$users)*100);
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,38 +16,7 @@ $femalespercent=round(($gender['female']/$users)*100);
 
 <script src="https://kit.fontawesome.com/272c99ad92.js" crossorigin="anonymous"></script>
 </head>
-<style>
-    .btn-file {
-    position: relative;
-    overflow: hidden;
-}
 
-.btn-file input[type=file] {
-    position: absolute;
-    top: 0;
-    right: 0;
-    min-width: 100%;
-    min-height: 100%;
-    font-size: 100px;
-    text-align: right;
-    filter: alpha(opacity=0);
-    opacity: 0;
-    outline: none;
-    background: white;
-    cursor: inherit;
-    display: block;
-}
-
-input[readonly] {
-  background-color: white !important;
-  cursor: text !important;
-}
-
-/* this is only due to codepen display don't use this outside of codepen */
-.container {
-  padding-top: 20px;
-}
-</style>
 <body>
     <div x-data="setup()" x-init="$refs.loading.classList.add('hidden'); setColors(color);" :class="{ 'dark': isDark}">
         <div class="flex h-screen antialiased text-gray-900 bg-gray-100 dark:bg-dark dark:text-light">
@@ -84,9 +43,14 @@ input[readonly] {
                             </span>
                         </button>
 
-                        <!-- Brand -->
+
 
                         <x-admin_navbar/>
+
+
+
+
+
 
                                 <!-- User dropdown menu -->
                                 <div x-show="open" x-ref="userMenu"
@@ -109,10 +73,9 @@ input[readonly] {
                             </div>
                         </nav>
 
-                        <!-- Mobile sub menu -->
                        <x-mobilenavbar/>
                     <!-- Mobile main manu -->
-<x-mobilesidebar/>
+                    <x-mobilesidebar/>
                     </div>
                 </header>
 
@@ -124,10 +87,95 @@ input[readonly] {
                     <!-- Content -->
                     <div class="mt-2">
                         <x-cards/>
+                        <!-- State cards -->
+
 
 </div>
                         </div>
 
+                        <div class="modal" id="modal">
+                    <div id="pop">
+                        <h1 class="dark:text-dark"> add a new language</h1>
+                            <i class="fa fa-times dark:text-dark" aria-hidden="true" id="close"></i>
+                            <form method="POST" action="{{route('admin.Mothertongueinsert')}}">
+                                @csrf
+
+                                    <input
+                                        class="p-2 border border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent ... "
+                                        type="text" id="name" type="text"  name="name"
+                                        placeholder="Enter the language" required>
+
+                                <br>
+                                <button class="transform motion-safe:hover:scale-110 ..." type="submit" id="submit">
+                                    submit
+                                </button>
+                            </form>
+
+
+
+                            <br>
+                    </div>
+                </div>
+                <br>
+                <br>
+                <div class="text-center mt-8 ">
+                    <a id="add" href="{{route('Blog.create.view')}}"  class=" mt-8"> <i class="fas fa-plus text-primary"></i>add new
+                        Blog </a>
+                </div>
+              <x-alert/>
+
+
+              <table class="shadow-lg">
+  <thead>
+
+    <tr>
+
+    <th class=" bg-primary-light">S.no</th>
+      <th class=" bg-primary-light">title</th>
+      <th class=" bg-primary-light">status</th>
+      <th class=" bg-primary-light">Is_approved</th>
+      <th class=" bg-primary-light">Banner_image</th>
+      <th class=" bg-primary-light">author</th>
+      <th class=" bg-primary-light">delete</th>
+      <th class=" bg-primary-light">edit</th>
+    </tr>
+  </thead>
+  <tbody>
+  @foreach($blogs as $key=>$item)
+    <tr class="text-sm">
+    <td data-column="S.no" class="dark:text-dark ">{{$item['id']}}</td>
+      <td data-column="title text-sm" class="dark:text-dark ">    {{$item['title']}}</td>
+      <td data-column="status"> @if ($item['status']==0)
+
+          <p id="inactive"  >inactive</p>
+          @else
+          <p id="active" >active</p>
+      @endif
+      </td>
+      <td data-column="is_approve"> @if ($item['is_approve']==0)
+
+        <p id="inactive"  >no</p>
+        @else
+        <p id="active" >yes</p>
+    @endif
+    </td>
+    <td data-column="image" class="dark:text-dark "><img src= {{asset('blogs/'.$item->banner_image)}} alt=""></td>
+    <td data-column="author" class=" text-xs dark:text-dark ">created by {{$item->user->name}} at {{$item->created_at}}</td>
+
+      <td data-column="delete"  id="delete"><a href="#"><i class="far fa-trash-alt"style="color:red"></i></a></td>
+      <td data-column="edit"><a href="#"><i class="far fa-edit"style="color:blue"></i></a></td>
+    </tr>
+    <tr>
+
+
+@endforeach
+
+</tbody>
+
+</table>
+<span id="links">{{$blogs->links()}}</span>
+<br>
+<br>
 
             <!-- More people... -->
 
@@ -138,68 +186,6 @@ input[readonly] {
                 <!-- Main footer -->
 
             </div>
-<br>
-<br>
-<!---------create blog-------->
-    <div class=" flex w-full justify-center px-8">
-        <br>
-      <form action="{{route('Blog.create')}}" method="post" enctype="multipart/form-data">
-@csrf
-        <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col px-8">
-          <div class="-mx-3  ">
-            <h3 class="font-bold text-gray-900 my-8 text-2xl">
-                Create A Blog
-             </h3>
-             <hr class="font-bold">
-                <br>
-              <label  class="uppercase tracking-wide text-black text-xs font-bold mb-2" for="company">
-                Title*
-              </label>
-              <input name="title"  class="w-full  bg-gray-200 mb-4  rounded-md text-black border border-primary rounded py-3 px-4  mx-8 focus:outline-none" id="company" type="text" placeholder="title">
-
-
-
-              <label class="uppercase tracking-wide text-black text-xs font-bold mb-2" for="title">
-                author*
-              </label>
-              <input name="author"  class="w-full bg-gray-200 mb-4 rounded-md text-black border border-primary rounded py-3 px-4  mx-8 focus:outline-none" id="title" type="text" value="{{auth()->user()->name}}">
-          </div>
-
-          <div >
-            <div class="md:w-full px-3">
-              <label class="uppercase tracking-wide text-black text-xs font-bold mb-2" for="application-link">
-                Description*
-              </label>
-              <textarea name="desc"  class="w-full bg-gray-200  mb-4 rounded-md text-black border border-primary rounded py-3 px-4  mx-8 focus:outline-none tinymce-editor" id="application-link"  ></textarea>
-            </div>
-          </div>
-          <br>
-          <div>
-
-            <label class="uppercase tracking-wide text-black text-xs font-bold mb-2" for="application-link">
-                Banner image*
-              </label>
-
-              <input name="banner_image" id="banner_image" class="w-full bg-gray-200 mb-4  rounded-md text-black border border-primary rounded py-3 px-4  mx-8 focus:outline-none" id="title" type="file" >
-              <img alt="" id="preview">
-          </div>
-          <div class="-mx-3 md:flex mb-2">
-
-
-
-          <div class="-mx-3 md:flex mt-2">
-            <div class="md:w-full px-3">
-
-              <button class="bg-primary text-white font-bold px-4 py-2 rounded-md">
-                create
-              </button>
-
-            </div>
-          </div>
-        </div>
-        <br>
-      </form>
-    </div>
 
             <!-- Panels -->
 
@@ -339,14 +325,10 @@ input[readonly] {
     </section>
     </div>
     </div>
-</body>
 
-</html>
     <!-- All javascript code in this project for now is just for demo DON'T RELY ON IT  -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.bundle.min.js"></script>
     <script src="build/js/script.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js" integrity="sha512-sW/w8s4RWTdFFSduOTGtk4isV1+190E/GghVffMA9XczdJ2MDzSzLEubKAs5h0wzgSJOQTRYyaz73L3d6RtJSg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
     <script>
     const setup = () => {
         const getTheme = () => {
@@ -425,7 +407,6 @@ input[readonly] {
                 this.isDark = !this.isDark
                 setTheme(this.isDark)
             },
-
             setLightTheme() {
                 this.isDark = false
                 setTheme(this.isDark)
@@ -481,68 +462,7 @@ input[readonly] {
         }
     }
 
-
     </script>
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
- <script src="https://cdn.tiny.cloud/1/nnd7pakaxqr7isf3oqefsdlew1jsidgl78umfeus6tg21ng0/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+</body>
 
- <script>
-    tinymce.init({
-        selector: 'textarea',
-
-        image_class_list: [
-        {title: 'img-responsive', value: 'img-responsive'},
-        ],
-        height: 500,
-        setup: function (editor) {
-            editor.on('init change', function () {
-                editor.save();
-            });
-        },
-        plugins: [
-            "advlist autolink lists link image charmap print preview anchor",
-            "searchreplace visualblocks code fullscreen",
-            "insertdatetime media table contextmenu paste imagetools"
-        ],
-        toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image ",
-
-        image_title: true,
-        automatic_uploads: true,
-        images_upload_url: '/upload',
-        file_picker_types: 'image',
-        file_picker_callback: function(cb, value, meta) {
-            var input = document.createElement('input');
-            input.setAttribute('type', 'file');
-            input.setAttribute('accept', 'image/*');
-            input.onchange = function() {
-                var file = this.files[0];
-
-                var reader = new FileReader();
-                reader.readAsDataURL(file);
-                reader.onload = function () {
-                    var id = 'blobid' + (new Date()).getTime();
-                    var blobCache =  tinymce.activeEditor.editorUpload.blobCache;
-                    var base64 = reader.result.split(',')[1];
-                    var blobInfo = blobCache.create(id, file, base64);
-                    blobCache.add(blobInfo);
-                    cb(blobInfo.blobUri(), { title: file.name });
-                };
-            };
-            input.click();
-        }
-    });
-</script>
-<!----------code for image preview------------------->
-<script>
-      let img = document.getElementById('banner_image');
-    img.addEventListener('change', function(event) {
-        if (event.target.files.length > 0) {
-            let src = URL.createObjectURL(event.target.files[0]);
-            let preview = document.getElementById('preview');
-            preview.src = src;
-            preview.style.display = "block"
-
-        }
-    })
-</script>
-
+</html>

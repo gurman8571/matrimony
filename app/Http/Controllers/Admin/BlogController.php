@@ -47,5 +47,12 @@ class BlogController extends Controller
     $blog->save();
   }
 
-
+       public function Index()
+       {
+         $blogs=Blog::where('status',1)
+         ->where('is _approve',1)
+         ->paginate();
+    //dd($blogs);
+         return view('Admin.Blogs.Index',compact('blogs'));
+       }
 }
