@@ -42,6 +42,7 @@ body {
 
 <script>
 window.onload = ()=>{
+
 document.getElementById('loader').style.display="none";
 document.querySelector('body').style.overflow="visible";
 

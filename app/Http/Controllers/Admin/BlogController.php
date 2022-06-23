@@ -42,6 +42,7 @@ class BlogController extends Controller
     $imagename = time().'-'.".".$req->banner_image->extension();
     $req->banner_image->move(public_path('blogs'), $imagename);
     $blog->banner_image = $imagename;
+    $blog->created_at=now();
 
 
     $blog->save();
@@ -49,10 +50,38 @@ class BlogController extends Controller
 
        public function Index()
        {
-         $blogs=Blog::where('status',1)
-         ->where('is _approve',1)
-         ->paginate();
+         $blogs=Blog::paginate();
     //dd($blogs);
          return view('Admin.Blogs.Index',compact('blogs'));
        }
+
+       public function status($id)
+       {
+        $data=Blog::find($id);
+//dd($data);
+        $status =0;
+        if ($data->status == 0) {
+            $status =1;
+         }
+
+        $data->status=$status;
+        $data->save();
+        return back()->with('message', 'status changed!');
+       }
+
+       public function approve($id)
+       {
+        $data=Blog::find($id);
+//dd($data);
+        $status =0;
+        if ($data->is_approve == 0) {
+            $status =1;
+         }
+
+        $data->is_approve=$status;
+        $data->save();
+        return back()->with('message', 'status changed!');
+       }
+
+
 }

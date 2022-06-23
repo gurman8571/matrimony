@@ -93,29 +93,6 @@
 </div>
                         </div>
 
-                        <div class="modal" id="modal">
-                    <div id="pop">
-                        <h1 class="dark:text-dark"> add a new language</h1>
-                            <i class="fa fa-times dark:text-dark" aria-hidden="true" id="close"></i>
-                            <form method="POST" action="{{route('admin.Mothertongueinsert')}}">
-                                @csrf
-
-                                    <input
-                                        class="p-2 border border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent ... "
-                                        type="text" id="name" type="text"  name="name"
-                                        placeholder="Enter the language" required>
-
-                                <br>
-                                <button class="transform motion-safe:hover:scale-110 ..." type="submit" id="submit">
-                                    submit
-                                </button>
-                            </form>
-
-
-
-                            <br>
-                    </div>
-                </div>
                 <br>
                 <br>
                 <div class="text-center mt-8 ">
@@ -147,20 +124,21 @@
       <td data-column="title text-sm" class="dark:text-dark ">    {{$item['title']}}</td>
       <td data-column="status"> @if ($item['status']==0)
 
-          <p id="inactive"  >inactive</p>
+          <a id="inactive" href="status/{{$item->id}}" >inactive</a>
           @else
-          <p id="active" >active</p>
+          <a id="active" href="status/{{$item->id}}">active</a>
       @endif
       </td>
       <td data-column="is_approve"> @if ($item['is_approve']==0)
 
-        <p id="inactive"  >no</p>
+        <a id="inactive" href="approve/{{$item->id}}" >no</a>
         @else
-        <p id="active" >yes</p>
+        <a id="active"  href="approve/{{$item->id}}" >yes</a>
     @endif
     </td>
+
     <td data-column="image" class="dark:text-dark "><img src= {{asset('blogs/'.$item->banner_image)}} alt=""></td>
-    <td data-column="author" class=" text-xs dark:text-dark ">created by {{$item->user->name}} at {{$item->created_at}}</td>
+    <td data-column="author" class=" text-xs dark:text-dark ">created by {{$item->user->name}} at {{ date("d-M-Y",strtotime($item->created_at)) }}</td>
 
       <td data-column="delete"  id="delete"><a href="#"><i class="far fa-trash-alt"style="color:red"></i></a></td>
       <td data-column="edit"><a href="#"><i class="far fa-edit"style="color:blue"></i></a></td>
