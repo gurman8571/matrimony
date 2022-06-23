@@ -16,10 +16,10 @@ $bool=UserProfileController::checkUser();
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
 <!-- Google web font "Open Sans" -->
 <link href="https://kit-pro.fontawesome.com/releases/v5.15.4/css/pro.min.css" rel="stylesheet">
-<link rel="stylesheet" href="css/bootstrap.min.css"> <!-- Bootstrap style -->
+<link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}"> <!-- Bootstrap style -->
 
 
-<link rel="stylesheet" href="css/tooplate-style.css"> <!-- Templatemo style -->
+<link rel="stylesheet" href="{{asset('css/tooplate-style.css')}}"> <!-- Templatemo style -->
 <link
 rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
@@ -34,7 +34,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
                         <nav class="navbar navbar-expand-lg narbar-light">
 
                             <a class="navbar-brand mr-auto" href="#">
-                                <img src="img/logo.png" alt="Site logo "class="logo">
+                                <img src="{{asset('img/logo.png')}}" alt="Site logo "class="logo">
                                 matrimony
                             </a>
                             <button type="button" id="nav-toggle" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#mainNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -44,7 +44,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
                             <div id="mainNav" class="collapse navbar-collapse tm-bg-white">
                                 <ul class="navbar-nav  ml-auto mb-2 mb-lg-0 ">
                                   <li class="nav-item-active">
-                                    <a class="nav-link" href="#top">Home <span class="sr-only">(current)</span></a>
+                                    <a class="nav-link" href="{{url('/')}}">Home <span class="sr-only">(current)</span></a>
                                   </li>
                                   @if (Route::has('login'))
                                   @auth
@@ -77,17 +77,17 @@ href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
                                   @endif
                                        <li class="nav-item-active">
                                     <a class="nav-link" href="#tm-section-6">Contact Us</a>
-
-
-<li class=" ms-auto">
-    <div class="ml-10  "> </li>
+                                       </li>
+                                    <li class="nav-item-active">
+                                        <a class="nav-link" href="{{route('blogs.list')}}">Blogs</a>
+                                    </li>
 
 
                                 </ul>
 
 <ul class="navbar-nav  ml-auto mb-2 mb-lg-0 text-end">
     @if(Auth::check()!=false)
-    <button class="btn btn-primary p-3" id="add"
+    <button class="btn btn-primary p-3 rounded rounded-2" id="add"
     href="{{ route('logout') }}"   onclick="event.preventDefault();
     document.getElementById('logout-form').submit();">
 Logout

@@ -20,7 +20,7 @@ use App\Http\Controllers\frontend\Userimagescontroller;
 use App\Http\Controllers\frontend\Indexcontroller;
 use App\Http\Controllers\likesController;
 use App\Http\Controllers\frontend\ProfilesController;
-
+use App\Http\Controllers\frontend\BlogController;
 
 /*
 /*
@@ -88,6 +88,9 @@ Route::post('User/age/filter',[SearchController::class,'agefilter'])->name('agef
 Route::post('Wedding/story', [WeddingStoryController::class, 'Create'])->name('Create.story');
 Route::post('like', [likesController::class, 'create'])->name('User.like');
 Route::post('Wedding/story/create', [WeddingStoryController::class, 'Create'])->name('Createstory');
+Route::get('blogs/list', [BlogController::class, 'Index'])->name('blogs.list');
+Route::get('blogs/detail/{id}', [BlogController::class, 'Detail'])->name('blog.Detail');
+
 });
 
 
@@ -184,5 +187,8 @@ Route::group(['middleware' => 'is_admin'], function () {
                //blog routes
                Route::post('admin/Blog/create',[AdminBlog::class, 'create'])->name('Blog.create');
                Route::get('admin/Blog/index',[AdminBlog::class, 'Index'])->name('Blog.index');
+               Route::get('admin/Blog/status/{id}',[AdminBlog::class, 'status'])->name('Blog.status');
+               Route::get('admin/Blog/approve/{id}',[AdminBlog::class, 'approve'])->name('Blog.approve');
                Route::view('blog/create','Admin.Blogs.Create')->name('Blog.create.view');
-});
+
+            });
