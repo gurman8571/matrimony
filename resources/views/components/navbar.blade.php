@@ -112,3 +112,6 @@ Logout
                 </div>
 
             </div>
+     <script src="{{asset('js/jquery-1.11.3.min.js')}}"></script> <!-- jQuery (https://jquery.com/download/) -->
+   <script src="{{asset('js/popper.min.js')}}"></script> <!-- https://popper.js.org/ -->
+   <script src="{{asset('js/bootstrap.min.js')}}"></script> <!-- https://getbootstrap.com/ -->
