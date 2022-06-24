@@ -290,6 +290,7 @@ p {
 .btn-primary:active {
     background-color: #d53239;
     border-color: #d53239;
+    outline:none;
 }
 
 .tm-search-form .tm-form-element {

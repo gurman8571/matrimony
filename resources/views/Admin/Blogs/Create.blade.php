@@ -144,7 +144,7 @@ input[readonly] {
     <div class=" flex w-full justify-center px-8">
         <br>
       <form action="{{route('Blog.create')}}" method="post" enctype="multipart/form-data">
-@csrf
+            @csrf
         <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col px-8">
           <div class="-mx-3  ">
             <h3 class="font-bold text-gray-900 my-8 text-2xl">

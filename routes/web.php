@@ -19,6 +19,7 @@ use App\Http\Controllers\frontend\WeddingStoryController;
 use App\Http\Controllers\frontend\Userimagescontroller;
 use App\Http\Controllers\frontend\Indexcontroller;
 use App\Http\Controllers\likesController;
+use App\Http\Controllers\MailController;
 use App\Http\Controllers\frontend\ProfilesController;
 use App\Http\Controllers\frontend\BlogController;
 
@@ -39,6 +40,7 @@ use App\Http\Controllers\frontend\BlogController;
 Route::get('/', [IndexController::class, 'masterdata'])->name('index');
 Route::view('error/403','errors.403')->name('error.403');
 Route::view('error/401','errors.401')->name('error.401');
+Route::post('/enquirymail', [MailController::class, 'EnquiryMail'])->name('EnquiryMail');
 
 Auth::routes(['verify' =>true]);
 //user routes

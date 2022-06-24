@@ -10,7 +10,7 @@ if ($blog->description) {
     //dd($answer);
     $replace = str_replace('<h2>', '<h2>', $answer);
     $finalanswer = str_replace('</h2>', '</h2>', $replace);
-    $finalanswer = str_replace('/[^A-Za-z0-9\-]/', '', $finalanswer);
+    $finalanswer = str_replace('&nsbp;', ' ', $finalanswer);
     $finalanswer = str_replace('<h2><br>', '<h2>', $finalanswer);
     $finalanswer = str_replace('<h2><br />', '<h2>', $finalanswer);
     $finalanswer = str_replace('<h2><br/>', '<h2>', $finalanswer);
@@ -173,7 +173,7 @@ if ($blog->description) {
     <ol>
         @if (!empty($finaltableH2))
            @foreach ($finaltableH2 as $key=>$table)
-               <a href="#{{ $table['id'] }}" style="color:#659fc9; font-size:20px" >
+               <a href="#{{ $table['id'] }}" style="color:#659fc9; font-size:17px" >
                    <li type="1">
                      {{ $table['text'] }}
                    </li>
@@ -193,44 +193,9 @@ if ($blog->description) {
 
 
                 </div>
+<x-enquiry-form/>
 
 
-
-                <div class="col-lg-4">
-
-                    <div class="widget-area" style="position: -webkit-sticky;position: sticky;top: 100px; m-4">
-
-
-<br>
-                        <div class="contact widget-item p-4  ">
-                            <br>
-                            <h3 class="border-left font-weight-bold" >Get Instant Advice</h3>
-                            <hr>
-                            <br>
-                            <form action="index.html" method="post" class="contact-form">
-                                <div class="form-group">
-                                    <input type="text" id="contact_name" name="contact_name" class="form-control"
-                                        placeholder="Name" required />
-                                </div>
-                                <div class="form-group">
-                                    <input type="email" id="contact_email" name="contact_email" class="form-control"
-                                        placeholder="Email" required />
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" id="contact_subject" name="contact_subject" class="form-control"
-                                        placeholder="Subject" required />
-                                </div>
-                                <div class="form-group">
-                                    <textarea id="contact_message" name="contact_message" class="form-control" rows="6"
-                                        placeholder="Message" required></textarea>
-                                </div>
-                                <button type="submit" class="btn btn-primary tm-btn-primary">Send Message Now</button>
-                            </form>
-
-
-                        </div>
-                    </div>
-                </div>
 
             </div>
         </div>
