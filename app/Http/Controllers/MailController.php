@@ -12,15 +12,16 @@ class MailController extends Controller
     {
         $data= [
             'name' => $req->name,
-            //'phone' => $req->phone,
+            'phone' => $req->phone,
             'email' => $req->email,
             'message' => $req->message,
-            'subject' => $req->subject,
+
 
             //'nationality' => $request->nationality ?? 'NA',
             //'user_ip' => $_SERVER['REMOTE_ADDR'],
             //'source' => $request->source,
         ];
+        //dd($data);
         Mail::to('gurma381@gmail.com')->send(new ContactMail($data));
         Mail::to($req->email)->send(new ThanksMail());
         $response = [

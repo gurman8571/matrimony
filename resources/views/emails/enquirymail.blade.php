@@ -42,10 +42,10 @@
                                     <td style="padding: 10px;">{{$data['name']}}</td>
                                 </tr>
 
-                                <!-----tr>
-                                    <td style="padding: 10px;width: 25%; "><b>Mobile : </b></td>
+                                <tr>
+                                    <td style="padding: 10px;width: 25%; "><b>Mobile : {{$data['phone']}}</b></td>
                                     <td style="padding: 10px;"> <td>
-                                </tr--->
+                                </tr>
 
                                 <tr>
                                     <td style="padding: 10px;width: 25%;"><b>Email : </b></td>
@@ -60,10 +60,7 @@
                                     <td style="padding: 10px;width: 25%;"><b>Date : </b></td>
                                     <td style="padding: 10px;">{{date('d-M-Y H:i:s')}}</td>
                                 </tr>
-                                <tr>
-                                    <td style="padding: 10px;width: 25%;"><b>Subject : </b></td>
-                                    <td style="padding: 10px;">{{$data['subject']}}</td>
-                                </tr>
+
                                 <tr>
                                     <td style="padding: 10px;width: 25%;"><b>Message : </b></td>
                                     <td style="padding: 10px;">{{$data['message']}}</td>
