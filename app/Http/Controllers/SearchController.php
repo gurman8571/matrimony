@@ -55,6 +55,7 @@ class SearchController extends Controller
            ->with('Likes')
            // ->whereBetween('age', [$age[0], $age[1]])
         ->get();
+        //dd($data);
 
 
 

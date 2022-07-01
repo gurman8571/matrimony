@@ -11,7 +11,7 @@
                     >
                       <!-- Left -->
                       <div class="me-5 d-none d-lg-block">
-                        <h5>Get connected with us on social networks:</h5>
+                        <h4>Get connected with us on social networks:</h4>
                       </div>
                       <!-- Left -->
 

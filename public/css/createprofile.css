@@ -1,9 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@600&family=Roboto&display=swap');
 * {
     margin: 0;
     padding: 0;
     text-transform: capitalize;
-    font-size: 20px;
+    font-size:13p;
+
 }
 
 ::-webkit-input-placeholder {
@@ -382,7 +382,7 @@ body {
 }
 
 * {
-    font-weight: 200;
+    font-weight: 400;
 }
 
 .regis-logotxt {

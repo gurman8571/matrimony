@@ -15,65 +15,11 @@
 
 </head>
 <style>
-    /*.blog-detail{*/
-    /*        word-break: break-all;*/
-    /*}*/
-    .blog-detail table {
-        width: 100% !important;
-    }
-
-    .blog-details-area .details-item .details-grow {
-        word-break: break-word;
-        text-align: justify;
-    }
-
-    .blog-h1 {
-        font-size: 36px !important;
-    }
-
-    .blog-detail h2 {
-        font-size: 32px !important;
-        font-weight: 700 !important;
-    }
-
-    .blog-detail h3 {
-        font-size: 28px !important;
-        font-weight: 600 !important;
-    }
-
-    .blog-detail h4 {
-        font-size: 24px !important;
-    }
-
-    .blog-detail h5 {
-        font-size: 22px !important;
-    }
-
-    .blog-detail h6 {
-        font-size: 18px !important;
-    }
-
-    img {
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    @media only screen and (max-width: 600px) {
-        .blog-detail img {
-            object-fit: contain;
-            height: 100% !important;
-            width: 100% !important;
-        }
-
-        .mobile-breadcrumb {
-            padding-top: 70px !important;
-        }
-    }
-.contact{
-    border: 0.4px solid #EE5057;
+   .card-img-top {
+    width: 100%;
+    height: 15vw;
+    object-fit: cover;
 }
-
 </style>
 
 
@@ -127,7 +73,9 @@
                            </div>
 
                           @endforeach
+
                         </div>
+
                </div>
 
                 </div>
@@ -139,8 +87,15 @@
             </div>
         </div>
     </div>
+    <br/>
+
+    <div class="d-flex justify-content-center" >
+        {{$blogs->links('pagination::semantic-ui')}}
+        </div>
     </div>
+
 <br>
+
 <x-footer/>
 
 </body>

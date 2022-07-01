@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ContactMail;
 use App\Mail\ThanksMail;
+use App\Models\Enquiry;
 use Illuminate\Http\Request;
 
 class MailController extends Controller
@@ -22,6 +23,13 @@ class MailController extends Controller
             //'source' => $request->source,
         ];
         //dd($data);
+         $enquiry=new Enquiry;
+         $enquiry->name=$data['name'];
+         $enquiry->phone=$data['phone'];
+         $enquiry->email=$data['email'];
+         $enquiry->message=$data['message'];
+         $enquiry->save();
+
         Mail::to('gurma381@gmail.com')->send(new ContactMail($data));
         Mail::to($req->email)->send(new ThanksMail());
         $response = [

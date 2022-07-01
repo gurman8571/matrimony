@@ -5,6 +5,9 @@ namespace App\Http\Controllers\frontend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Blog;
+use Illuminate\Pagination\Paginator;
+
+
 class BlogController extends Controller
 {
 
@@ -12,7 +15,7 @@ class BlogController extends Controller
 
     public function masterdata()
     {
-        $blogs=Blog::where('status',1)->where('is_approve',1)->get();
+         $blogs=Blog::where('status',1)->where('is_approve',1)->latest()->paginate(4);
         return $blogs;
     }
     public function Index(Type $var = null)
