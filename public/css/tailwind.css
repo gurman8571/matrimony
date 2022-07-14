@@ -339,7 +339,7 @@ sub {
     bottom: -0.25em;
 }
 
-#active {
+.active {
     border-radius: 10px;
     color: var( --color-green-light);
     --tw-bg-opacity: 1;
@@ -347,7 +347,7 @@ sub {
     background-color: rgba(209, 250, 229, var(--tw-bg-opacity));
 }
 
-#inactive {
+.inactive {
     background-color: #ffe6e6;
     color: #ff3333;
     padding: 6px;

@@ -78,6 +78,9 @@ class User extends Authenticatable implements mustVerifyEmail
       //$data->toarray();
         return $data;
     }
-
+    public function getRouteKeyName()
+    {
+        return 'name';
+    }
 
 }

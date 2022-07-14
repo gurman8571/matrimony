@@ -15,6 +15,8 @@ use App\Models\Caste;
 use App\Models\Mothertongue;
 use App\Models\Occupation;
 use App\Models\Education;
+use PDF;
+
 class UserController extends Controller
 {
     public static function calculateuser()
@@ -168,5 +170,26 @@ public function Search(request $req)
 
      //dd($data);
      return view('Admin.Userindex',compact('data'));
+}
+
+public function export()
+{
+    $users=User::where('is_admin',0)->get(
+    ['gender','email','id','Marital_Status','source','phone']);
+
+
+
+    $count=$users->count();
+    $data = [
+        'title' => 'detail of users of matrimony.com',
+        'date' => date('m/d/Y'),
+        'users' => $users,
+        'count'=>$count
+    ];
+
+    $pdf = PDF::loadView('Admin.Export', $data);
+
+    return $pdf->download('users.pdf');
+
 }
 }

@@ -114,7 +114,7 @@ Route::group(['middleware' => 'is_admin'], function () {
 
     Route::get('/admin/caste/index', [CasteController::class, 'casteindex'])->name('admin.casteindex');
 
-    Route::get('/admin/caste/status/{id}', [CasteController::class, 'castestatus'])->name('admin.castestatus');
+    Route::get('/admin/caste/status', [CasteController::class, 'castestatus'])->name('admin.castestatus');
 
     Route::get('/admin/caste/delete/{id}', [CasteController::class, 'castedelete'])->name('admin.castedelete');
 
@@ -122,7 +122,7 @@ Route::group(['middleware' => 'is_admin'], function () {
 
     Route::get('/admin/religion/index', [ReligionController::class, 'religionindex'])->name('admin.religionindex');
 
-    Route::get('/admin/religion/status/{id}', [ReligionController::class, 'religionstatus'])->name('admin.religionstatus');
+    Route::get('/admin/religion/status', [ReligionController::class, 'religionstatus'])->name('admin.religionstatus');
 
     Route::get('/admin/religion/delete/{id}', [ReligionController::class, 'religiondelete'])->name('admin.religiondelete');
 
@@ -130,7 +130,7 @@ Route::group(['middleware' => 'is_admin'], function () {
 
     Route::get('/admin/mothertongue/index', [MothertongueController::class, 'index'])->name('admin.Mothertongueindex');
 
-    Route::get('/admin/mothertongue/status/{id}', [MothertongueController::class, 'status'])->name('admin.Mothertonguestatus');
+    Route::get('/admin/mothertongue/status', [MothertongueController::class, 'status'])->name('admin.Mothertonguestatus');
 
     Route::get('/admin/mothertongue/delete/{id}', [MothertongueController::class, 'delete'])->name('admin.Mothertonguedelete');
 
@@ -138,7 +138,7 @@ Route::group(['middleware' => 'is_admin'], function () {
 
     Route::get('/admin/Occupation/index', [OccupationController::class, 'index'])->name('admin.Occupationindex');
 
-    Route::get('/admin/Occupation/status/{id}', [OccupationController::class, 'status'])->name('admin.Occuaptionstatus');
+    Route::get('/admin/Occupation/status', [OccupationController::class, 'status'])->name('admin.Occuaptionstatus');
 
     Route::get('/admin/Occupation/delete/{id}', [OccupationController::class, 'delete'])->name('admin.Occupationdelete');
 
@@ -147,7 +147,7 @@ Route::group(['middleware' => 'is_admin'], function () {
 
     Route::get('/admin/Country/index', [CountryController::class, 'index'])->name('admin.Countryindex');
 
-    Route::get('/admin/Country/status/{id}', [CountryController::class, 'status'])->name('admin.Countrystatus');
+    Route::get('/admin/Country/status', [CountryController::class, 'status'])->name('admin.Countrystatus');
 
     Route::get('/admin/Country/delete/{id}', [CountryController::class, 'delete'])->name('admin.Countrydelete');
 
@@ -156,7 +156,7 @@ Route::group(['middleware' => 'is_admin'], function () {
 
     Route::get('/admin/State/index', [StateController::class, 'index'])->name('admin.Stateindex');
 
-    Route::get('/admin/State/status/{id}', [StateController::class, 'status'])->name('admin.Statestatus');
+    Route::get('/admin/State/status', [StateController::class, 'status'])->name('admin.Statestatus');
 
     Route::get('/admin/State/delete/{id}', [StateController::class, 'delete'])->name('admin.Statedelete');
 
@@ -164,7 +164,7 @@ Route::group(['middleware' => 'is_admin'], function () {
 
     Route::get('/admin/Education/index', [EducationController::class, 'index'])->name('admin.Educationindex');
 
-    Route::get('/admin/Education/status/{id}', [EducationController::class, 'status'])->name('admin.Educationstatus');
+    Route::get('/admin/Education/status', [EducationController::class, 'status'])->name('admin.Educationstatus');
 
     Route::get('/admin/Education/delete/{id}', [EducationController::class, 'delete'])->name('admin.Educationdelete');
 
@@ -185,18 +185,20 @@ Route::group(['middleware' => 'is_admin'], function () {
 
     Route::get('/User/delete/{id}', [UserController::class, 'delete'])->name('User.delete');
     Route::get('/User/Role/{id}', [UserController::class, 'Role'])->name('User.status');
+    Route::get('/export-data', [UserController::class, 'export'])->name('User.export');
 
     Route::get('/User/status/{id}', [UserController::class, 'status'])->name('User.status');
     Route::get('/User/Story', [AdminStory::class, 'index'])->name('Admin.stories');
     Route::get('admin/User/Story/delete/{id}', [AdminStory::class, 'delete'])->name('Admin.stories.delete');
     Route::get('admin/User/story/Preview/{id}',[AdminStory::class, 'Preview'])->name('User.story.Preview');
     Route::get('admin/User/story/Disaply/status/{id}',[AdminStory::class, 'Display'])->name('User.story.displaystatus');
+    Route::get('generate-pdf', [PDFController::class, 'generatePDF']);
 
 
                //blog routes
     Route::post('admin/Blog/create',[AdminBlog::class, 'create'])->name('Blog.create');
     Route::get('admin/Blog/index',[AdminBlog::class, 'Index'])->name('Blog.index');
-    Route::get('admin/Blog/status/{id}',[AdminBlog::class, 'status'])->name('Blog.status');
+    Route::get('admin/Blog/status',[AdminBlog::class, 'status'])->name('Blog.status');
     Route::get('admin/Blog/approve/{id}',[AdminBlog::class, 'approve'])->name('Blog.approve');
     Route::view('blog/create','Admin.Blogs.Create')->name('Blog.create.view');
 

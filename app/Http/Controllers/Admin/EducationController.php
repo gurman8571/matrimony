@@ -21,9 +21,9 @@ class EducationController extends Controller
         //dd($data);
         return view('admin.Education_index',['data'=>$data]);
      }
-     public  function status($id)
+     public  function status(request $req)
      {
-        $data=Education::find($id);
+        $data=Education::find($req->id);
 
         $status =0;
         if ($data->status == 0) {
@@ -32,7 +32,7 @@ class EducationController extends Controller
 
         $data->status=$status;
         $data->save();
-        return back()->with('message', 'status changed!');
+        return response()->json(['status'=>$status]);
 
      }
      public  function delete($id)

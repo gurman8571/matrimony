@@ -68,7 +68,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
                                   </li>
                              @if($bool === true)
                                   <li class="nav-item-active">
-                                    <a class="nav-link" href="{{route('getprofile')}}">Profile</a>
+                                    <a class="nav-link" href="{{route('getprofile')}}"> my Profile</a>
 
 
                                   </li>

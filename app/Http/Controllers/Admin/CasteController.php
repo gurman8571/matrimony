@@ -23,27 +23,27 @@ class CasteController extends Controller
        //dd($data);
        return view('admin.casteindex',['data'=>$data]);
     }
-    public  function castestatus($id)
+    public  function castestatus(request $req)
     {
-       $data=Caste::find($id);
-       
+       $data=Caste::find($req->id);
+
        $status =0;
        if ($data->status == 0) {
            $status =1;
-        } 
- 
+        }
+
        $data->status=$status;
        $data->save();
-       return back()->with('message', 'status has been changed!');
-    
+       return response()->json(['status'=>$status]);
+
     }
     public  function castedelete($id)
     {
        $data=Caste::find($id);
        $data->delete();
        return back()->with('delete', 'caste has been deleted!');
-    
+
 
       }
-   
+
 }

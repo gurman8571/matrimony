@@ -10,29 +10,29 @@ class CountryController extends Controller
         public function index()
         {
               $data=Country::paginate(6);
-              return view('admin.countryindex',['data'=>$data]);      
+              return view('admin.countryindex',['data'=>$data]);
         }
 
-        public  function status($id)
+        public  function status(request $req)
     {
-       $data=Country::find($id);
-       
+       $data=Country::find($req->id);
+
        $status =0;
        if ($data->status == 0) {
            $status =1;
-        } 
- 
+        }
+
        $data->status=$status;
        $data->save();
-       return back()->with('message', 'status changed!');
-    
+       return response()->json(['status'=>$status]);
+
     }
     public  function delete($id)
     {
        $data=Country::find($id);
        $data->delete();
        return back()->with('delete', 'Country deleted!');
-    
+
     }
     public  function insert(request $req)
    {

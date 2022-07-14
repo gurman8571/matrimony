@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    
+
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;700;900&display=swap"
         rel="stylesheet" />
 
@@ -13,7 +13,7 @@
     <script src="https://cdn.jsdelivr.net/gh/alpine-collective/alpine-magic-helpers@0.5.x/dist/component.min.js">
     </script>
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.min.js" defer></script>
-    
+
 <script src="https://kit.fontawesome.com/272c99ad92.js" crossorigin="anonymous"></script>
 </head>
 
@@ -44,9 +44,9 @@
                         </button>
 
                         <!-- Brand -->
-                   
+
                         <x-admin_navbar/>
-                
+
                                 <!-- User dropdown menu -->
                                 <div x-show="open" x-ref="userMenu"
                                     x-transition:enter="transition-all transform ease-out"
@@ -58,12 +58,12 @@
                                     @keydown.escape="open = false"
                                     class="absolute right-0 w-48 py-1 bg-white rounded-md shadow-lg top-12 ring-1 ring-black ring-opacity-5 dark:bg-dark focus:outline-none"
                                     tabindex="-1" role="menu" aria-orientation="vertical" aria-label="User menu">
-                                  
-                                   
-                             
 
-                             
-                            
+
+
+
+
+
                                 </div>
                             </div>
                         </nav>
@@ -71,19 +71,19 @@
                         <!-- Mobile sub menu -->
                        <x-mobilenavbar/>
                     <!-- Mobile main manu -->
-<x-mobilesidebar/>                   
+<x-mobilesidebar/>
                     </div>
                 </header>
 
                 <!-- Main content -->
                 <main>
                     <!-- Content header -->
-                   
+
 
                     <!-- Content -->
                     <div class="mt-2">
                         <x-cards/>
-                       
+
 </div>
                         </div>
                         <div class="modal" id="modal">
@@ -92,12 +92,12 @@
                             <i class="fa fa-times dark:text-dark" aria-hidden="true" id="close"></i>
                             <form method="POST" action="{{route('admin.Countryinsert')}}">
                                 @csrf
-                               
+
                                     <input
                                         class="p-2 border border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent ... "
                                         type="text" id="name" type="text"  name="name"
                                         placeholder="Enter the Country" required>
-                              
+
                                 <br>
                                 <button class="transform motion-safe:hover:scale-110 ..." type="submit" id="submit">
                                     submit
@@ -114,19 +114,19 @@
                         Country </button>
                 </div>
 
-<x-alert/>        
+<x-alert/>
 
 <table class="shadow-lg">
     <tbody >
-  <thead  > 
-     
+  <thead  >
+
     <tr>
 
       <th class=" bg-primary-light">S.no</th>
       <th class=" bg-primary-light">name</th>
       <th class=" bg-primary-light">status</th>
       <th class=" bg-primary-light">delete</th>
-      <th class=" bg-primary-light">change status</th>
+
     </tr>
   </thead>
   <tbody>
@@ -134,19 +134,15 @@
     <tr>
       <td data-column="S.no" class="dark:text-dark ">{{$item['id']}}</td>
       <td data-column="name" class="dark:text-dark ">    {{$item['name']}}</td>
-      <td data-column="status"> @if ($item['status']==0)
-          
-          <p id="inactive"  >inactive</p>
-          @else
-          <p id="active" >active</p> 
-      @endif
-      </td>   
+      <td data-column="status">
+         <p class="{{$item['status'] == 0 ?'inactive' :'active'}} status cursor-pointer"  data-id="{{$item->id}}"  >{{$item['status'] == 0 ?'inactive' :'active'}}</p>
+
+      </td>
       <td data-column="delete" id="delete"><a href="/admin/Country/delete/{{$item['id']}}"><i class="far fa-trash-alt"style="color:red"></i></a></td>
-      <td data-column="change status"><a href="/admin/Country/status/{{$item['id']}}"> change status</a></td>
     </tr>
     <tr>
-    
-   
+
+
 @endforeach
 
 </tbody>
@@ -157,13 +153,13 @@
 <br>
 
             <!-- More people... -->
-         
-      
-  
-     
+
+
+
+
 
                 <!-- Main footer -->
-             
+
             </div>
 
             <!-- Panels -->
@@ -308,155 +304,42 @@
     <!-- All javascript code in this project for now is just for demo DON'T RELY ON IT  -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.bundle.min.js"></script>
     <script src="build/js/script.js"></script>
+    <script src="{{asset('js/admin_panel.js')}}"></script>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" ></script>
     <script>
-    const setup = () => {
-        const getTheme = () => {
-            if (window.localStorage.getItem('dark')) {
-                return JSON.parse(window.localStorage.getItem('dark'))
-            }
-
-            return !!window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
-        }
-
-        const setTheme = (value) => {
-            window.localStorage.setItem('dark', value)
-            
-        }
-
-        const getColor = () => {
-            if (window.localStorage.getItem('color')) {
-                return window.localStorage.getItem('color')
-            }
-            return 'cyan'
-        }
-
-        const setColors = (color) => {
-            const root = document.documentElement
-            root.style.setProperty('--color-primary', `var(--color-${color})`)
-            root.style.setProperty('--color-primary-50', `var(--color-${color}-50)`)
-            root.style.setProperty('--color-primary-100', `var(--color-${color}-100)`)
-            root.style.setProperty('--color-primary-light', `var(--color-${color}-light)`)
-            root.style.setProperty('--color-primary-lighter', `var(--color-${color}-lighter)`)
-            root.style.setProperty('--color-primary-dark', `var(--color-${color}-dark)`)
-            root.style.setProperty('--color-primary-darker', `var(--color-${color}-darker)`)
-            this.selectedColor = color
-            window.localStorage.setItem('color', color)
-            //
-        }
-
-        const updateBarChart = (on) => {
-            const data = {
-                data: randomData(),
-                backgroundColor: 'rgb(207, 250, 254)',
-            }
-            if (on) {
-                barChart.data.datasets.push(data)
-                barChart.update()
-            } else {
-                barChart.data.datasets.splice(1)
-                barChart.update()
-            }
-        }
-
-        const updateDoughnutChart = (on) => {
-            const data = random()
-            const color = 'rgb(207, 250, 254)'
-            if (on) {
-                doughnutChart.data.labels.unshift('Seb')
-                doughnutChart.data.datasets[0].data.unshift(data)
-                doughnutChart.data.datasets[0].backgroundColor.unshift(color)
-                doughnutChart.update()
-            } else {
-                doughnutChart.data.labels.splice(0, 1)
-                doughnutChart.data.datasets[0].data.splice(0, 1)
-                doughnutChart.data.datasets[0].backgroundColor.splice(0, 1)
-                doughnutChart.update()
-            }
-        }
-
-        const updateLineChart = () => {
-            lineChart.data.datasets[0].data.reverse()
-            lineChart.update()
-        }
-
-        return {
-            loading: true,
-            isDark: getTheme(),
-            toggleTheme() {
-                this.isDark = !this.isDark
-                setTheme(this.isDark)
-            },
-            
-            setLightTheme() {
-                this.isDark = false
-                setTheme(this.isDark)
-            },
-            setDarkTheme() {
-                this.isDark = true
-                setTheme(this.isDark)
-            },
-            color: getColor(),
-            selectedColor: 'cyan',
-            setColors,
-            toggleSidbarMenu() {
-                this.isSidebarOpen = !this.isSidebarOpen
-            },
-            isSettingsPanelOpen: false,
-            openSettingsPanel() {
-                this.isSettingsPanelOpen = true
-                this.$nextTick(() => {
-                    this.$refs.settingsPanel.focus()
-                })
-            },
-            isNotificationsPanelOpen: false,
-            openNotificationsPanel() {
-                this.isNotificationsPanelOpen = true
-                this.$nextTick(() => {
-                    this.$refs.notificationsPanel.focus()
-                })
-            },
-            isSearchPanelOpen: false,
-            openSearchPanel() {
-                this.isSearchPanelOpen = true
-                this.$nextTick(() => {
-                    this.$refs.searchInput.focus()
-                })
-            },
-            isMobileSubMenuOpen: false,
-            openMobileSubMenu() {
-                this.isMobileSubMenuOpen = true
-                this.$nextTick(() => {
-                    this.$refs.mobileSubMenu.focus()
-                })
-            },
-            isMobileMainMenuOpen: false,
-            openMobileMainMenu() {
-                this.isMobileMainMenuOpen = true
-                this.$nextTick(() => {
-                    this.$refs.mobileMainMenu.focus()
-                })
-            },
-            updateBarChart,
-            updateDoughnutChart,
-            updateLineChart,
-        }
-    }
-    document.getElementById('add').addEventListener('click', () => {
-        document.getElementById('pop').style.display = "flex";
-        document.getElementById('modal').style.display = "flex";
-
-    })
-    document.getElementById('close').addEventListener('click', () => {
-        document.getElementById('pop').style.display = "none"
-        document.getElementById('modal').style.display = "none";
-
-    })
-    document.getElementById('alert-close').addEventListener('click', () => {
-        document.getElementById('alert').style.display = "none"
-      
-
-    })
+     $(function() {
+     $('.status').click(function() {
+         //var status = $(this).prop('checked') == true ? 1 : 0;
+         var id = $(this).data('id');
+         var status=$(this);
+     //console.log(button);
+         $.ajax({
+             type: "GET",
+             dataType: "json",
+             url: "{{route('admin.Countrystatus')}}",
+             data: { 'id': id},
+             success: function(data){
+               if(data.status == 1){
+              status.removeClass("inactive");
+               status.addClass("active");
+               status.html('active')
+               }
+               else if (data.status == 0){
+                 status.removeClass("active");
+               status.addClass("inactive");
+               status.html('inactive')
+               }
+               else{
+                 console.log('internal error occured');
+               }
+             }
+         });
+     })
+   })
     </script>
+
 </body>
 
 </html>

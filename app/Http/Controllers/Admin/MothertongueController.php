@@ -22,9 +22,9 @@ class MothertongueController extends Controller
        //dd($data);
        return view('admin.mothertongue_index',['data'=>$data]);
     }
-    public  function status($id)
+    public  function status(request $req)
     {
-       $data=Mothertongue::find($id);
+       $data=Mothertongue::find($req->id);
 
        $status =0;
        if ($data->status == 0) {
@@ -33,8 +33,7 @@ class MothertongueController extends Controller
 
        $data->status=$status;
        $data->save();
-       return back()->with('message', 'status changed!');
-
+       return response()->json(['status'=>$status]);
     }
     public  function delete($id)
     {

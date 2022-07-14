@@ -21,26 +21,26 @@ class ReligionController extends Controller
        //dd($data);
        return view('admin.religion_index',['data'=>$data]);
     }
-    public  function religionstatus($id)
+    public  function religionstatus(request $req)
     {
-       $data=Religion::find($id);
-       
+       $data=Religion::find($req->id);
+
        $status =0;
        if ($data->status == 0) {
            $status =1;
-        } 
- 
+        }
+
        $data->status=$status;
        $data->save();
-       return back()->with('message', 'status changed!');
-    
+       return response()->json(['status'=>$status]);
+
     }
     public  function religiondelete($id)
     {
        $data=Religion::find($id);
        $data->delete();
        return back()->with('delete', 'religion deleted!');
-    
+
     }
 
 }

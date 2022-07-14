@@ -131,7 +131,7 @@
       <th class=" bg-primary-light">name</th>
       <th class=" bg-primary-light">status</th>
       <th class=" bg-primary-light">delete</th>
-      <th class=" bg-primary-light">change status</th>
+
                     </tr>
                 </thead>
                 <tbody>
@@ -139,17 +139,14 @@
                     <tr>
                     <td data-column="S.no" class="dark:text-dark ">{{$item['id']}}</td>
       <td data-column="name" class="dark:text-dark ">    {{$item['name']}}</td>
-                        <td data-column="status"> @if ($item['status']==0)
+                        <td data-column="status">
 
-                            <p id="inactive">inactive</p>
-                            @else
-                            <p id="active">active</p>
-                            @endif
+                            <p class="{{$item['status'] == 0 ?'inactive' :'active'}} status cursor-pointer"  data-id="{{$item->id}}"  >{{$item['status'] == 0 ?'inactive' :'active'}}</p>
+
                         </td>
 
                         <td data-column="delete" id="delete"><a href="/admin/caste/delete/{{$item['id']}}"><i
                                     class="far fa-trash-alt" style="color:red"></i></a></td>
-                        <td data-column="change status"><a href="/admin/caste/status/{{$item['id']}}"> change status</a>
                         </td>
                     </tr>
                     <tr>
@@ -314,154 +311,39 @@
     <!-- All javascript code in this project for now is just for demo DON'T RELY ON IT  -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.bundle.min.js"></script>
     <script src="build/js/script.js"></script>
-    <script>
-    const setup = () => {
-        const getTheme = () => {
-            if (window.localStorage.getItem('dark')) {
-                return JSON.parse(window.localStorage.getItem('dark'))
+    <script src="{{asset('js/admin_panel.js')}}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" ></script>
+   <script>
+    $(function() {
+    $('.status').click(function() {
+        //var status = $(this).prop('checked') == true ? 1 : 0;
+        var id = $(this).data('id');
+        var status=$(this);
+    //console.log(button);
+        $.ajax({
+            type: "GET",
+            dataType: "json",
+            url: "{{route('admin.castestatus')}}",
+            data: { 'id': id},
+            success: function(data){
+              if(data.status == 1){
+             status.removeClass("inactive");
+              status.addClass("active");
+              status.html('active')
+              }
+              else if (data.status == 0){
+                status.removeClass("active");
+              status.addClass("inactive");
+              status.html('inactive')
+              }
+              else{
+                console.log('internal error occured');
+              }
             }
-
-            return !!window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
-        }
-
-        const setTheme = (value) => {
-            window.localStorage.setItem('dark', value)
-
-        }
-
-        const getColor = () => {
-            if (window.localStorage.getItem('color')) {
-                return window.localStorage.getItem('color')
-            }
-            return 'cyan'
-        }
-
-        const setColors = (color) => {
-            const root = document.documentElement
-            root.style.setProperty('--color-primary', `var(--color-${color})`)
-            root.style.setProperty('--color-primary-50', `var(--color-${color}-50)`)
-            root.style.setProperty('--color-primary-100', `var(--color-${color}-100)`)
-            root.style.setProperty('--color-primary-light', `var(--color-${color}-light)`)
-            root.style.setProperty('--color-primary-lighter', `var(--color-${color}-lighter)`)
-            root.style.setProperty('--color-primary-dark', `var(--color-${color}-dark)`)
-            root.style.setProperty('--color-primary-darker', `var(--color-${color}-darker)`)
-            this.selectedColor = color
-            window.localStorage.setItem('color', color)
-            //
-        }
-
-        const updateBarChart = (on) => {
-            const data = {
-                data: randomData(),
-                backgroundColor: 'rgb(207, 250, 254)',
-            }
-            if (on) {
-                barChart.data.datasets.push(data)
-                barChart.update()
-            } else {
-                barChart.data.datasets.splice(1)
-                barChart.update()
-            }
-        }
-
-        const updateDoughnutChart = (on) => {
-            const data = random()
-            const color = 'rgb(207, 250, 254)'
-            if (on) {
-                doughnutChart.data.labels.unshift('Seb')
-                doughnutChart.data.datasets[0].data.unshift(data)
-                doughnutChart.data.datasets[0].backgroundColor.unshift(color)
-                doughnutChart.update()
-            } else {
-                doughnutChart.data.labels.splice(0, 1)
-                doughnutChart.data.datasets[0].data.splice(0, 1)
-                doughnutChart.data.datasets[0].backgroundColor.splice(0, 1)
-                doughnutChart.update()
-            }
-        }
-
-        const updateLineChart = () => {
-            lineChart.data.datasets[0].data.reverse()
-            lineChart.update()
-        }
-
-        return {
-            loading: true,
-            isDark: getTheme(),
-            toggleTheme() {
-                this.isDark = !this.isDark
-                setTheme(this.isDark)
-            },
-            setLightTheme() {
-                this.isDark = false
-                setTheme(this.isDark)
-            },
-            setDarkTheme() {
-                this.isDark = true
-                setTheme(this.isDark)
-            },
-            color: getColor(),
-            selectedColor: 'cyan',
-            setColors,
-            toggleSidbarMenu() {
-                this.isSidebarOpen = !this.isSidebarOpen
-            },
-            isSettingsPanelOpen: false,
-            openSettingsPanel() {
-                this.isSettingsPanelOpen = true
-                this.$nextTick(() => {
-                    this.$refs.settingsPanel.focus()
-                })
-            },
-            isNotificationsPanelOpen: false,
-            openNotificationsPanel() {
-                this.isNotificationsPanelOpen = true
-                this.$nextTick(() => {
-                    this.$refs.notificationsPanel.focus()
-                })
-            },
-            isSearchPanelOpen: false,
-            openSearchPanel() {
-                this.isSearchPanelOpen = true
-                this.$nextTick(() => {
-                    this.$refs.searchInput.focus()
-                })
-            },
-            isMobileSubMenuOpen: false,
-            openMobileSubMenu() {
-                this.isMobileSubMenuOpen = true
-                this.$nextTick(() => {
-                    this.$refs.mobileSubMenu.focus()
-                })
-            },
-            isMobileMainMenuOpen: false,
-            openMobileMainMenu() {
-                this.isMobileMainMenuOpen = true
-                this.$nextTick(() => {
-                    this.$refs.mobileMainMenu.focus()
-                })
-            },
-            updateBarChart,
-            updateDoughnutChart,
-            updateLineChart,
-        }
-    }
-    document.getElementById('add').addEventListener('click', () => {
-        document.getElementById('pop').style.display = "flex";
-        document.getElementById('modal').style.display = "flex";
-
+        });
     })
-    document.getElementById('close').addEventListener('click', () => {
-        document.getElementById('pop').style.display = "none"
-        document.getElementById('modal').style.display = "none";
-
-    })
-    document.getElementById('alert-close').addEventListener('click', () => {
-        document.getElementById('alert').style.display = "none"
-
-
-    })
-    </script>
+  })
+   </script>
 </body>
 
 </html>

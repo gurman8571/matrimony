@@ -55,10 +55,10 @@ class BlogController extends Controller
          return view('Admin.Blogs.Index',compact('blogs'));
        }
 
-       public function status($id)
+       public function status(request $req)
        {
-        $data=Blog::find($id);
-//dd($data);
+        $data=Blog::find($req->id);
+        //dd($data);
         $status =0;
         if ($data->status == 0) {
             $status =1;
@@ -66,7 +66,8 @@ class BlogController extends Controller
 
         $data->status=$status;
         $data->save();
-        return back()->with('message', 'status changed!');
+        return response()->json(['status'=>$status]);
+        //return back()->with('message', 'status changed!');
        }
 
        public function approve($id)

@@ -74,9 +74,6 @@ https://www.tooplate.com/view/2095-matrimony
             </div>
             <div class="modal-body  text-danger">
                 <ul id="errorlist">
-
-
-
                 </ul>
 <form action="{{route('Create.story')}}" method="POST" id="form" enctype="multipart/form-data"  >
 
@@ -106,9 +103,10 @@ https://www.tooplate.com/view/2095-matrimony
   </div>
   <div class="form-group">
     <label for="exampleFormControlFile1"><i class="fad fa-image"></i> Wedding image*</label>
-    <input type="file" class="form-control-file" name="image" value="{{old('image')}}" required accept="image/png,image/jpeg,image/bmp,image/gif"
+    <input type="file" class="form-control-file"  id="wedding_story_image" name="image" value="{{old('image')}}" required accept="image/png,image/jpeg,image/bmp,image/gif"
 
     id="exampleFormControlFile1">
+    <img src="" alt="" id="preview">
   </div>
   <script>
 
@@ -429,9 +427,8 @@ https://www.tooplate.com/view/2095-matrimony
    <script src="js/jquery-1.11.3.min.js"></script> <!-- jQuery (https://jquery.com/download/) -->
    <script src="js/popper.min.js"></script> <!-- https://popper.js.org/ -->
    <script src="js/bootstrap.min.js"></script> <!-- https://getbootstrap.com/ -->
-
 <script>
-
+//to append errors in form
 let form=document.getElementById('form');
 let story=document.getElementById('story');
 let ul=document.getElementById('errorlist');
@@ -456,9 +453,17 @@ ul.append(error);
 
 
 })
+//image preview code
+let img = document.getElementById('wedding_story_image');
+    img.addEventListener('change', function(event) {
+        if (event.target.files.length > 0) {
+            let src = URL.createObjectURL(event.target.files[0]);
+            let preview = document.getElementById('preview');
+            preview.src = src;
+            preview.style.display = "block"
 
-
-
+        }
+    })
 
 
 

@@ -17,9 +17,9 @@ class StateController extends Controller
 
     }
 
-    public  function status($id)
+    public  function status(request $req)
 {
-   $data=State::find($id);
+   $data=State::find($req->id);
 
    $status =0;
    if ($data->status == 0) {
@@ -28,7 +28,7 @@ class StateController extends Controller
 
    $data->status=$status;
    $data->save();
-   return back()->with('message', 'status changed!');
+   return response()->json(['status'=>$status]);
 
 }
 public  function delete($id)
